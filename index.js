@@ -11,11 +11,11 @@ web_server.listen(3000,'localhost',()=>{
     console.log("Server Started At:",currentDate())
     console.log("http://localhost:3000");
     // makeFolder();
-    CreateAFile();
+   
     
 })
 
-web_server.get('/', (req, res) => {
+web_server.get('/filelist', (req, res) => {
     
     const textFiles = getTextFilesInFolder(folderPath);
   
@@ -30,4 +30,16 @@ web_server.get('/', (req, res) => {
         message: 'No text files found.',
       });
     }
+   
+  });
+
+  web_server.get('/create_file', (req, res) => {
+    CreateAFile();
+    res.send('File Created!');
+  });
+
+  web_server.get('/', (req, res) => {
+    
+    res.send('/create_file   ---->TO CREATE A FILE         /filelist  ----->TO RETRIEVE FILES');
+   
   });
